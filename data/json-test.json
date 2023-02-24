@@ -1,0 +1,12 @@
+[	
+	{
+		"common name": "Red Fox",
+		"scientific name": "Vulpes vulpes",
+		"thumbnail image": "assets/fox_pictures/fake_fox0.png"
+	},
+	{
+		"common name": "Arctic Fox",
+		"scientific name": "Vulpes lagopus",
+		"thumbnail image": "assets/fox_pictures/fake_fox2.png"
+	}
+]
