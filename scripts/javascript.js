@@ -1,5 +1,4 @@
 var foxArray = [];
-
 //Function that takes url to fetch
 async function getApi(url) {
 	const response = await fetch(url);
@@ -27,8 +26,8 @@ function printJSON() {
 var col = [];
 
 function printHeaders() {
-	let length = foxArray.length;
-	let headerLength = --length;
+	var length = foxArray.length;
+	var headerLength = --length;
 	
 	//get header for table
 	for (let i = 0; i < length; i++) {
@@ -52,17 +51,18 @@ for (let i = 0; i < col.length; i++) {
 	
 
 
-/* WIP CODE BROKEN FIX THIS
+
 //add the actual data from the JSON file as rows
-for (let a = 0; a < length; a++) {
-		tr table.insertRow(1);
+let rowLength = ++length;
+for (let a = 0; a < rowLength; a++) {
+		let tr = table.insertRow(-1);
 		
-		for (let j = 0; j < col.length; j++) {
+		for (let j = 0; j < (col.length - 0); j++) {
 			let tabCell = tr.insertCell(-1)
-			tabCell.innerHTML = foxArray[i][col[j]];
+			tabCell.innerHTML = foxArray[a][col[j]];
 		}
 	}
-*/
+
 
 
 

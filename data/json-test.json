@@ -13,5 +13,10 @@
 		"common name": "Island Fox",
 		"scientific name": "Urocyon",
 		"thumbnail image": "assets/fox_pictures/fake_fox2.png"
+	},
+	{
+		"common name": "Bat-eared Fox",
+		"scientific name": "Otocyon",
+		"thumbnail image": "assets/fox_pictures/fake_fox3.png"
 	}
 ]
