@@ -11,22 +11,24 @@ async function getApi(url) {
 
 //calls function with url to JSON and saves it to global variable
 async function doJSON(){
+	document.getElementById("table-section").classList.toggle("fade");
 	var data = await getApi('data/json-test.json');
 	foxArray = data;
 	//console.log(data);
 	console.log('data written');
+	printTable();
 	
 }
 
 
-//Print the saved array
+//Print the saved array, debugging function
 function printJSON() {
 	console.log(foxArray.length);
 }
 
 var col = [];
 
-function printHeaders() {
+function printTable() {
 	var length = foxArray.length;
 	var headerLength = --length;
 	

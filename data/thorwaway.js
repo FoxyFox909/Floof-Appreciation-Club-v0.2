@@ -23,6 +23,10 @@ function doJSON() {
 }
 
 
+<button id="testbutton" type="button" onclick="doJSON()">Fetch JSON</button>
+			<button id="testbutton" type="button" onclick="printJSON()">Log Array Length</button>
+			<button id="testbutton" type="button" onclick="printHeaders()">Print Headers</button>
+
 //console.log('Image id is ' + document.getElementById(('Fox' + b)));
 		//setTimeout(() => {
 			//let genImg = document.getElementById(('Fox-' + b));

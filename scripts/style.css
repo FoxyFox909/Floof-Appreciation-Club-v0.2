@@ -103,25 +103,77 @@ body {
 
 .button-wrapper {
 	text-align: center;
-	border: 3px solid pink;
-	margin: 20px auto auto auto;
+	//border: 3px solid pink;
+	margin: 10px auto auto auto;
 }
 
-section {
-	border: 6px solid green;
+#table-section {
 	text-align: center;
+	border: 3px solid black;
+	border-radius: 3px;
+	margin: auto;
+	width: 500px;
 	background-color: rgba(0, 0, 0, 0.15);
 	backdrop-filter: blur(4px);
+	height: 100%;
+	opacity: 1;
+	transition: height 1s, opacity 2s;
+}
+
+#table-section.fade {
+	text-align: center;
+	visibility: hidden;
+	width: auto;
+	height: 1%;
+	opacity: 0;
+	
+}
+
+table {
+	margin: auto;
+	border-collapse: collapse;
+	font-size: 1.2em;
+	font-family: sans-serif;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+}
+
+
+#showFoxes {
+	align-text: center;
 }
 
 
 table, th, td {
-	border: 1px solid;
+	//border: 1px solid;
 	text-align: center;
+	padding: 12px 15px;
 }
 
 th {
-	background-color: cyan
+	background-color: #2d3634;
+	text-align: left;
+	font-family: sans-serif;
+	text-transform: capitalize;
+	color: #fff;
+	border-right: 1px solid black;
+	border-left: 1px solid black;
+}
+
+tbody tr {
+	border-bottom: 1px solid #2d3634;
+}
+
+tbody tr:nth-of-type(even) {
+	background-color: #49575425;
+}
+
+tbody tr:last-of-type {
+	border-bottom: 2px solid #2d3634;
+}
+
+tbody tr:hover {
+	font-weight: bold;
+	color: #b8d6d0;
 }
 
 
@@ -129,7 +181,7 @@ th {
 	
 	border-radius: 25%;
 	border: 1px solid;
-	border-color: cyan;
+	border-color: #2d3634;
 	width: 50px;
 	height: 50px;
 }
@@ -186,4 +238,69 @@ th {
     -webkit-transform: rotate(-25deg);
     transform: rotate(-25deg);
 	overflow: visible;
+}
+
+
+/* Main button */
+.main-button {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #18181a;
+  color: #18181a;
+  display: inline-block;
+  font-size: 15px;
+  line-height: 15px;
+  padding: 18px 18px 17px;
+  text-decoration: none;
+  cursor: pointer;
+  background: #fff;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.main-button span:first-child {
+  position: relative;
+  transition: color 600ms cubic-bezier(0.48, 0, 0.12, 1);
+  z-index: 10;
+}
+
+.main-button span:last-child {
+  color: white;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  transition: all 500ms cubic-bezier(0.48, 0, 0.12, 1);
+  z-index: 100;
+  opacity: 0;
+  top: 50%;
+  left: 50%;
+  transform: translateY(225%) translateX(-50%);
+  height: 14px;
+  line-height: 13px;
+}
+
+.main-button:after {
+  content: "";
+  position: absolute;
+  bottom: -50%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  transform-origin: bottom center;
+  transition: transform 600ms cubic-bezier(0.48, 0, 0.12, 1);
+  transform: skewY(9.3deg) scaleY(0);
+  z-index: 50;
+}
+
+.main-button:hover:after {
+  transform-origin: bottom center;
+  transform: skewY(9.3deg) scaleY(2);
+}
+
+.main-button:hover span:last-child {
+  transform: translateX(-50%) translateY(-100%);
+  opacity: 1;
+  transition: all 900ms cubic-bezier(0.48, 0, 0.12, 1);
 }
