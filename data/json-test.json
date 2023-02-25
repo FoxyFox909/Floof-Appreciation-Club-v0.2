@@ -7,6 +7,11 @@
 	{
 		"common name": "Arctic Fox",
 		"scientific name": "Vulpes lagopus",
+		"thumbnail image": "assets/fox_pictures/fake_fox1.png"
+	},
+	{
+		"common name": "Island Fox",
+		"scientific name": "Urocyon",
 		"thumbnail image": "assets/fox_pictures/fake_fox2.png"
 	}
 ]
