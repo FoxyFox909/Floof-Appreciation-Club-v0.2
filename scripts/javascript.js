@@ -1,3 +1,4 @@
+
 var foxArray = [];
 //Function that takes url to fetch
 async function getApi(url) {
@@ -9,23 +10,64 @@ async function getApi(url) {
 }
 
 //calls function with url to JSON and saves it to global variable
-async function doJSON(){
-	var data = await getApi('data/json-test.json');
-	foxArray = data;
-	//console.log(data);
-	console.log('data written');
+
+function mainButton(){
+
+document.getElementById("table-section").classList.toggle("fade");
+//document.getElementById("switch-button").setAttribute("onClick","refreshJSON()"); commented until bugfix comes out
+document.getElementById("switch-button").setAttribute("onClick","hideTab()");
+document.getElementById("switch-button").innerHTML="<span>Toggle Foxes</span><span>Hide/Reshow the Foxes</span>" 
+doJSON();
+}
+
+function hideTab() {
+	document.getElementById("table-section").classList.toggle("fade");
+}
+
+async function refreshJSON() {
+	var removeTab = document.getElementById('GeneratedTable');
+	foxArray = [];
+	//var parentEl = removeTab.parentElement;
+	//parentEl.removeChild(removeTab);
+	//document.getElementById('showFoxes').innerHTML= '';
+	//var eleS = document.getElementById('GeneratedTable');
+	//eleS.parentNode.removeChild(eleS);
+	//var delRows = document.getElementById('GeneratedTable').rows[0];
+	//console.log(document.getElementById('GeneratedTable').textContent);
+	document.getElementById('GeneratedTable').textContent='';
+	console.log(document.getElementById('GeneratedTable').textContent);
+	//document.getElementById('showFoxes').removeChild(removeTab);
+	document.getElementById('showFoxes').innerHTML='';
+	
+	await doJSON();
+	
+	
+
+	//delRows.deleteCell(0);
+	//for (var i = 0
 	
 }
 
 
-//Print the saved array
+async function doJSON() {
+	
+	var data = await getApi('data/json-test.json');
+	foxArray = data;
+	//console.log(data);
+	console.log('data written');
+	printTable();
+	
+}
+
+
+//Print the saved array, debugging function
 function printJSON() {
 	console.log(foxArray.length);
 }
 
 var col = [];
 
-function printHeaders() {
+function printTable() {
 	var length = foxArray.length;
 	var headerLength = --length;
 	
@@ -38,10 +80,11 @@ function printHeaders() {
 	}
 //console.log(col);
 const table = document.createElement('table');
+table.setAttribute('id', 'GeneratedTable');
 
 const tr = table.insertRow(-1);
 
-//Build the header for the table with common name, scientific name, and thumbnail image
+//Build the header for the table with common name, scientific name, and thumbnail
 console.log('creating table')
 for (let i = 0; i < col.length; i++) {
 	let th = document.createElement("th");
@@ -50,18 +93,57 @@ for (let i = 0; i < col.length; i++) {
 	}
 	
 
-
-
 //add the actual data from the JSON file as rows
-let rowLength = ++length;
+var rowLength = ++length;
 for (let a = 0; a < rowLength; a++) {
 		let tr = table.insertRow(-1);
 		
-		for (let j = 0; j < (col.length - 0); j++) {
+		for (let j = 0; j < (col.length - 1); j++) {
 			let tabCell = tr.insertCell(-1)
 			tabCell.innerHTML = foxArray[a][col[j]];
 		}
 	}
+	
+	
+//thumbnail column handler	
+setTimeout(() => {
+	for (let b = 0; b < rowLength; b++) {
+		let genTable = document.getElementById('GeneratedTable');
+		let newImg = document.createElement('img');
+		let newButton = document.createElement('button');
+		
+		console.log(rowLength);
+		newImg.src=foxArray[b]['thumbnail'];
+		newImg.setAttribute('id', ('fox-image-' + b));
+		newImg.setAttribute('class', 'fox-thumbs');
+		console.log(foxArray[b]['thumbnail']);
+		
+		newButton.setAttribute('id', ('fox-button-' + b));
+		newButton.setAttribute('class', 'fox-buttons');
+		
+		//append images to buttons, delay is added becuse otherwise we get null
+		setTimeout( () => {
+		document.getElementById('fox-button-' + b).appendChild(newImg);
+		document.getElementById('fox-button-' + b).setAttribute("onClick",`console.log('Button ' + ${b} + ' pressed')`);
+		}, '10')
+		
+		//Generate empty cell with id and class 
+		let tabCell = genTable.rows[(1+b)].insertCell(-1);
+		tabCell.setAttribute('id', ('fox-thumb-td-' + b));
+		tabCell.setAttribute('class', 'fox-thumbs-wrapper');
+		
+		
+		//append children buttons to each new cell element
+		document.getElementById('fox-thumb-td-' + b).appendChild(newButton);
+
+				
+	}
+	
+	
+	//document.getElementById('GeneratedTable').rows[1].insertCell(2);
+	}, '10')
+//console.log(foxArray[1]['thumbnail']);
+
 
 
 
@@ -71,212 +153,42 @@ const divShowFoxes = document.getElementById('showFoxes');
 divShowFoxes.innerHTML = "";
 divShowFoxes.appendChild(table);
 
-}
-
-
-
-//data/json-test.json
-
-/*function call(input) {
-	return new Promise((resolve, reject) => {
-		return resolve({
-			val: input
-		})
-	})
-}
-
-async function test() {
-	const res = await call("data/json-test.json")
-	console.log(res.val)
-console.log(res["val"])
-}
-
-function doJSON() {
-	console.log("test running");
-	test();
-}
+/*
+setTimeout(() => {
+	var links = document.getElementsByTagName('link');
+	for (var cl in links)
+		{
+			var link = links[cl]
+			if (link.rel === "stylesheet")
+				link.href += "";
+			console.log('reloaded css');
+			
+		}
+	}, '50')
 */
-
-
-/*function load (url) {
-	return new Promise(async function (resolve, reject) {
-		const res = await fetch(url);
-		
-		console.log('Loaded: ', url);
-		
-		
-		resolve(res.json());
-		})
-	}
-
-//const promise = load('data/json-test.json');
-const promise = load('data/json-test.json');
-
-function doJSON() {
-	console.log('doJSON function loaded')
-	let savedData = promise;
-	console.log(savedData);
-	console.log(typeof savedData);
-	//refinedJSON = promise.resolve().then((result) => {console.log(result)});
-	let refinedJSON = promise.valueOf;
-	console.log(refinedJSON);
 }
-*/
 
 
 
 
 
-//https://www.encodedna.com/javascript/populate-json-data-to-html-table-using-javascript.htm
-//https://www.freecodecamp.org/news/how-to-read-json-file-in-javascript/
+
+
+
+
 
 /*
-function load (url) {
-	return new Promise(async function (resolve, reject) {
-		const res = await fetch(url);
-		
-		console.log('Loaded: ', url);
-		
-		
-		resolve(res.json());
-		})
+IMAGE HANDLER PROTOTYPE
+setTimeout(() => {
+	for (let b = 0; b < rowLength; b++) {
+		let genTable = document.getElementById('GeneratedTable');
+		console.log(rowLength);
+		let tabCell = genTable.rows[(1+b)].insertCell(-1);
+		tabCell.innerHTML = foxArray[b]['thumbnail'];
+		//document.createElement('table').insertRow(-1).insertCell(-1).innerHTML = foxArray[b]['thumbnail'];		
 	}
-
-//const promise = load('data/json-test.json');
-const promise = load('data/json-test.json');
-
-function doJSON() {
-	console.log('doJSON function loaded')
-	let savedData = promise;
-	console.log(savedData);
-	console.log(typeof savedData);
-	refinedJSON = promise.resolve().then((result) => {console.log(result)});
-	console.log(refinedJSON);
-}
-*/
-
-
-
-
-
-
-
-
-//var storedPromise = fetchJSON();
-
-/* 
-function fetchJSON() {
-		fetch('data/json-test.json')
-		.then(response => response.json()).
-		then((fox) =>{
-			//console.log(fox);
-			return fox;
-		});
-}
-
-
-const printJSON = async () => {
-	const a = await fox;
-	console.log(a);
-};
-
-*/
-
-/*
-
-function printJSON() {
-	var storedPromise = fetchJSON();
-	console.log('No Delay');
-	storedPromise.then(({common name}) => console.log({common name});
-}
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*var savedData = "";
-
-
-
-async function fetchJSON() {
-	fetch('data/json-test.json')
-		.then((response) => response.json())
-		.then((data) => console.log(data));
-	
-}
-
-async function saveJSON() {
-	let fetchedData = await fetchJSON();
-	//setTimeout(() => {console.log(fetchedData)}, 500);
-	savedData += fetchedData;
-}
-
-function processJSON() {
-	fetchJSON();
-	saveJSON();
-}
-
-function printJSON() {
-	console.log(savedData);
-}
-
-*/
-
-
-
 	
 	
-
-/* 
-
-
-	function printJSON() {
-	fetch('data/json-test.json')
-		.then((response) => response.json())
-		.then((data) => console.log(data));
-	
-}
-
-
-
-
-
-	async function printJSON() {
-	fetch('data/json-test.json')
-		.then(function (response) {
-		response.json();
-		return response;
-		})
-		.then(function (data) {
-			console.log(data);
-		};
-		
-	
-}
-
-async function writeinVar(){
-	let array = await printJSON();
-	console.log(array);
-}
-
-async function fetchData(){
-	let response = await fetch('data/json-test.json');
-	let data = await response.json();
-	data = JSON.stringify(data);
-	data = JSON.parse(data);
-	return data;
-}
-
-let testdata = await fetchData();
-console.log(testdata);
+	//document.getElementById('GeneratedTable').rows[1].insertCell(2);
+	}, '10')
 */
