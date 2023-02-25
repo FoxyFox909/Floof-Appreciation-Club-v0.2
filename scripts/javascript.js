@@ -1,5 +1,4 @@
 var foxArray = [];
-
 //Function that takes url to fetch
 async function getApi(url) {
 	const response = await fetch(url);
@@ -18,9 +17,63 @@ async function doJSON(){
 	
 }
 
+
+//Print the saved array
 function printJSON() {
-	console.log(foxArray);
+	console.log(foxArray.length);
 }
+
+var col = [];
+
+function printHeaders() {
+	var length = foxArray.length;
+	var headerLength = --length;
+	
+	//get header for table
+	for (let i = 0; i < length; i++) {
+		for (let key in foxArray[(i + headerLength)]) {
+		col.push(key);
+		console.log(key);
+		}	
+	}
+//console.log(col);
+const table = document.createElement('table');
+
+const tr = table.insertRow(-1);
+
+//Build the header for the table with common name, scientific name, and thumbnail image
+console.log('creating table')
+for (let i = 0; i < col.length; i++) {
+	let th = document.createElement("th");
+	th.innerHTML = col[i];
+	tr.appendChild(th);
+	}
+	
+
+
+
+//add the actual data from the JSON file as rows
+let rowLength = ++length;
+for (let a = 0; a < rowLength; a++) {
+		let tr = table.insertRow(-1);
+		
+		for (let j = 0; j < (col.length - 0); j++) {
+			let tabCell = tr.insertCell(-1)
+			tabCell.innerHTML = foxArray[a][col[j]];
+		}
+	}
+
+
+
+
+//Actually put the newly-created table into a container elemtn
+const divShowFoxes = document.getElementById('showFoxes');
+divShowFoxes.innerHTML = "";
+divShowFoxes.appendChild(table);
+
+}
+
+
 
 //data/json-test.json
 
