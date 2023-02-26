@@ -102,7 +102,29 @@ body {
 	//overflow-y: hidden;
 	overflow-x: hidden;
 	background-size: cover;
+	animation: bg-fade-2 2s;
+	//animation-direction: alternate;
+	
 }
+
+body.bg-switch {
+	background-image: url("../assets/images/arctic_fox.jpg");
+	animation: bg-fade 2s;
+	//animation-direction: alternate;
+	
+	
+}
+
+@keyframes bg-fade {
+	0% {backdrop-filter: blur(4px);}
+	100% {backdrop-filter: blur(0px);}
+}
+
+@keyframes bg-fade-2 {
+	0% {backdrop-filter: blur(4px);}
+	100% {backdrop-filter: blur(0px);}
+}
+
 
 .button-wrapper {
 	text-align: center;
@@ -182,8 +204,9 @@ tbody tr:hover {
 }
 
 td {
+	//font-size: 1.2em;
 	font-weight: bold;
-	-webkit-text-stroke: 0.25px orange;
+	-webkit-text-stroke: 0.25px #b8d6d0;;
 	white-space: nowrap;
 }
 
@@ -236,6 +259,10 @@ Individual thumbnaisl may be manually adjusted by pointing at their unique gener
 	
 }
 
+
+/* Manual overrides and fixes */
+
+
 #fox-image-0 {
 	transform: scale(2) translateY(8px);
 }
@@ -248,7 +275,14 @@ Individual thumbnaisl may be manually adjusted by pointing at their unique gener
 	transform: scale(2.8) translateX(9px) translateY(9px);
 }
 
+.bg-1, .bg-3 {
+	background-position: 0px -300px;
+}
 
+
+	.bg-2 {
+	background-position: 0px -80px;
+}
 
 
 

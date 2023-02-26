@@ -1,5 +1,7 @@
 
 var foxArray = [];
+var storedBG = [];
+//var foxBG = 0;
 //Function that takes url to fetch
 async function getApi(url) {
 	const response = await fetch(url);
@@ -16,7 +18,7 @@ function mainButton(){
 document.getElementById("table-section").classList.toggle("fade");
 //document.getElementById("switch-button").setAttribute("onClick","refreshJSON()"); commented until bugfix comes out
 document.getElementById("switch-button").setAttribute("onClick","hideTab()");
-document.getElementById("switch-button").innerHTML="<span>Toggle Foxes</span><span>Hide/Reshow the Foxes</span>" 
+document.getElementById("switch-button").innerHTML="<span>Toggle Table</span><span>Hide/Reshow the Foxes</span>" 
 doJSON();
 }
 
@@ -105,6 +107,12 @@ for (let a = 0; a < rowLength; a++) {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
 //thumbnail column handler	
 setTimeout(() => {
 	for (let b = 0; b < rowLength; b++) {
@@ -112,6 +120,8 @@ setTimeout(() => {
 		let newImg = document.createElement('img');
 		let newButton = document.createElement('button');
 		
+		
+		//Create image element for later use
 		console.log(rowLength);
 		newImg.src=foxArray[b]['thumbnail'];
 		newImg.setAttribute('id', ('fox-image-' + b));
@@ -124,7 +134,9 @@ setTimeout(() => {
 		//append images to buttons, delay is added becuse otherwise we get null
 		setTimeout( () => {
 		document.getElementById('fox-button-' + b).appendChild(newImg);
-		document.getElementById('fox-button-' + b).setAttribute("onClick",`console.log('Button ' + ${b} + ' pressed')`);
+		//document.getElementById('fox-button-' + b).setAttribute("onClick",`console.log('Button ' + ${b} + ' pressed')`);
+		document.getElementById('fox-button-' + b).setAttribute("onClick",`changeBG(${b})`);
+	
 		}, '10')
 		
 		//Generate empty cell with id and class 
@@ -153,23 +165,58 @@ const divShowFoxes = document.getElementById('showFoxes');
 divShowFoxes.innerHTML = "";
 divShowFoxes.appendChild(table);
 
-/*
-setTimeout(() => {
-	var links = document.getElementsByTagName('link');
-	for (var cl in links)
-		{
-			var link = links[cl]
-			if (link.rel === "stylesheet")
-				link.href += "";
-			console.log('reloaded css');
-			
-		}
-	}, '50')
-*/
+
+
+getBG();
+
+
 }
 
 
+function getBG() {
+	for (i = 0; i < foxArray.length; i++) {
+			console.log("storedBG " + foxArray[i]['thumbnail']);
+			
+			storedBG[i] = foxArray[i]['thumbnail'];
+			
+	}
+}
 
+	//smooth switch handler
+	var bgSwitch = 1;
+function changeBG(foxBG) {
+	
+	if (bgSwitch) {
+		document.getElementById('page-body').classList.add('bg-switch');
+		bgSwitch--;
+	} else {
+		document.getElementById('page-body').classList.remove('bg-switch');
+		bgSwitch++;
+	}
+	
+	//console.log(`url(${foxBG})`)
+	//document.getElementById('page-body').style.backgroundImage = `url(${storedBG[foxBG]})`;
+	//document.getElementById('page-body').setAttribute('class', ('bg-' + foxBG));
+	
+	
+	
+	
+
+	
+	/*for later use
+	switch (foxBG) {
+		
+		case 0:
+			console.log('foxBG equals 0');
+			break;
+		case 1:
+			console.log('foxBG equals 1');
+			break;
+	}
+	*/
+	
+	
+}
 
 
 

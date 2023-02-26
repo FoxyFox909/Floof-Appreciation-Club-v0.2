@@ -22,6 +22,19 @@ function doJSON() {
 	console.log(refinedJSON);
 }
 
+/*
+setTimeout(() => {
+	var links = document.getElementsByTagName('link');
+	for (var cl in links)
+		{
+			var link = links[cl]
+			if (link.rel === "stylesheet")
+				link.href += "";
+			console.log('reloaded css');
+			
+		}
+	}, '50')
+*/
 
 <button id="testbutton" type="button" onclick="doJSON()">Fetch JSON</button>
 			<button id="testbutton" type="button" onclick="printJSON()">Log Array Length</button>
